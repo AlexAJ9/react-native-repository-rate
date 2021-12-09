@@ -1,7 +1,8 @@
 const theme = {
   colors: {
     textPrimary: "#24292e",
-    textSecondary: "#586069",
+    textSecondary: "#696969",
+    textGray: "#909090",
     primary: "#0366d6",
     tabBackground: "#24292e",
   },
