@@ -1,11 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import Text from "./Text";
+import { Link } from "react-router-native";
 import theme from "../theme";
 
 const styles = StyleSheet.create({
   tab: {
-    backgroundColor: theme.colors.tabBackground,
     height: 75,
   },
   text: {
@@ -17,13 +17,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = () => {
+const AppBarTab = ({ url = "", text }) => {
   return (
     <View style={styles.tab}>
       <Pressable>
-        <Text style={styles.text} fontWeight="bold" color="textSecondary">
-          Repositories
-        </Text>
+        <Link to={`/${url}`}>
+          <Text style={styles.text} fontWeight="bold" color="textSecondary">
+            {text}
+          </Text>
+        </Link>
       </Pressable>
     </View>
   );
