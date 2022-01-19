@@ -13,8 +13,8 @@ const signInValidationSchema = yup.object().shape({
     .min(3, "Username should be at least 3 characters")
     .required("Username is required"),
   password: yup
-    .number()
-    .min(8, "Password should be at least 8   characters")
+    .string()
+    .min(8, "Password should be at least 8 characters")
     .required("Password is required"),
 });
 const SignIn = () => {
