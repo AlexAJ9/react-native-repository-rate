@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     height: 58,
   },
   language: {
-    width: "max-content",
+    width: 100,
     alignSelf: "flex-start",
     backgroundColor: theme.colors.primary,
     borderRadius: 5,
