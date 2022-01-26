@@ -17,16 +17,24 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ url = "", text }) => {
+const AppBarTab = ({ url = "", text, onClickFunction = undefined }) => {
   return (
     <View style={styles.tab}>
-      <Pressable>
-        <Link to={`/${url}`}>
+      {onClickFunction ? (
+        <Pressable onPress={onClickFunction}>
           <Text style={styles.text} fontWeight="bold" color="textSecondary">
             {text}
           </Text>
-        </Link>
-      </Pressable>
+        </Pressable>
+      ) : (
+        <Pressable>
+          <Link to={`/${url}`}>
+            <Text style={styles.text} fontWeight="bold" color="textSecondary">
+              {text}
+            </Text>
+          </Link>
+        </Pressable>
+      )}
     </View>
   );
 };
