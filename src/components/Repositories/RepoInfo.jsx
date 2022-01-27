@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import theme from "../theme";
-import Text from "./Text";
+import theme from "../../theme";
+import Text from "../Text";
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -21,7 +21,7 @@ function formatNumber(num) {
 }
 const RepoInfo = ({ label, data }) => {
   return (
-    <View style={styles.container}>
+    <View testID="repositoryInfoItem" style={styles.container}>
       <View>
         <Text style={styles.data}>{formatNumber(data)}</Text>
       </View>
