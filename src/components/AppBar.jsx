@@ -29,7 +29,10 @@ const AppBar = () => {
             <AppBarTab text="Sign out" onClickFunction={signOut} />
           </>
         ) : (
-          <AppBarTab url="sign-in" text="Sign in" />
+          <>
+            <AppBarTab url="sign-in" text="Sign in" />
+            <AppBarTab url="sign-up" text="Sign up" />
+          </>
         )}
       </ScrollView>
     </View>
