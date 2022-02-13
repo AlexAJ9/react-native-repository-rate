@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 export const GET_REPOSITORIES = gql`
-  query {
-    repositories {
+  query ($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection) {
+    repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
       edges {
         node {
           id
