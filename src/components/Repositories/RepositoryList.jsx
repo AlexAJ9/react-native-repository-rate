@@ -3,6 +3,8 @@ import { FlatList, View, StyleSheet } from "react-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../../utils/hooks/useRepositories";
 import OrderByRepositories from "./OrderByRepositories";
+import RepoSearch from "./RepositorySearch";
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   separator: {
@@ -18,6 +20,8 @@ export const RepositoryListContainer = ({
   repositories,
   orderBy,
   setOrderBy,
+  searchQuery,
+  setSearchQuery,
 }) => {
   const repositoriesData = repositories
     ? repositories?.edges?.map((edge) => edge.node)
@@ -26,7 +30,13 @@ export const RepositoryListContainer = ({
     <FlatList
       data={repositoriesData}
       ListHeaderComponent={
-        <OrderByRepositories orderBy={orderBy} setOrderBy={setOrderBy} />
+        <>
+          <RepoSearch
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
+          <OrderByRepositories orderBy={orderBy} setOrderBy={setOrderBy} />
+        </>
       }
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
@@ -36,6 +46,8 @@ export const RepositoryListContainer = ({
 };
 const RepositoryList = () => {
   const [orderBy, setOrderBy] = useState("Latest repositories");
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchKeyword] = useDebounce(searchQuery, 500);
 
   //Fix this
   const order =
@@ -44,13 +56,18 @@ const RepositoryList = () => {
       : orderBy === "Lowest rated repositories"
       ? { orderBy: "RATING_AVERAGE", orderDirection: "ASC" }
       : { orderBy: "CREATED_AT", orderDirection: "DESC" };
-  const { repositories } = useRepositories(order);
+  const { repositories } = useRepositories({
+    ...order,
+    searchKeyword,
+  });
 
   return (
     <RepositoryListContainer
       repositories={repositories}
       orderBy={orderBy}
       setOrderBy={setOrderBy}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
     />
   );
 };

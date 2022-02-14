@@ -22,9 +22,9 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
+        <AppBarTab text="Repositories" />
         {data?.me ? (
           <>
-            <AppBarTab text="Repositories" />
             <AppBarTab text="Create a review" url="create-review" />
             <AppBarTab text="Sign out" onClickFunction={signOut} />
           </>
