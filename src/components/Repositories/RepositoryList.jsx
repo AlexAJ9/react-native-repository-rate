@@ -22,6 +22,7 @@ export const RepositoryListContainer = ({
   setOrderBy,
   searchQuery,
   setSearchQuery,
+  onEndReach,
 }) => {
   const repositoriesData = repositories
     ? repositories?.edges?.map((edge) => edge.node)
@@ -41,6 +42,8 @@ export const RepositoryListContainer = ({
       ItemSeparatorComponent={ItemSeparator}
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };
@@ -56,10 +59,15 @@ const RepositoryList = () => {
       : orderBy === "Lowest rated repositories"
       ? { orderBy: "RATING_AVERAGE", orderDirection: "ASC" }
       : { orderBy: "CREATED_AT", orderDirection: "DESC" };
-  const { repositories } = useRepositories({
+
+  const { repositories, fetchMore } = useRepositories({
     ...order,
     searchKeyword,
+    first: 6,
   });
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <RepositoryListContainer
@@ -68,6 +76,7 @@ const RepositoryList = () => {
       setOrderBy={setOrderBy}
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}
+      onEndReach={onEndReach}
     />
   );
 };
