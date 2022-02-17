@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
-import { IS_USER_AUTHENTICATED } from "../../graphql/queries";
+import { GET_CURRENT_USER } from "../../graphql/queries";
 
-const useIsUserAuthenticated = () => {
-  const { data, error, loading } = useQuery(IS_USER_AUTHENTICATED, {
+const useIsUserAuthenticated = (variables) => {
+  const { data, error, loading, fetchMore } = useQuery(GET_CURRENT_USER, {
     fetchPolicy: "cache-and-network",
+    variables: variables,
   });
 
   return { data, error, loading };

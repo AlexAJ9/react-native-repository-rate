@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../../utils/hooks/useRepositories";
 import OrderByRepositories from "./OrderByRepositories";
 import RepoSearch from "./RepositorySearch";
 import { useDebounce } from "use-debounce";
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
+import ItemSeparator from "../common/Separator";
 
 const renderItem = ({ item }) => <RepositoryItem repository={item} />;
 
