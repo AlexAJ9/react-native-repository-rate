@@ -30,7 +30,11 @@ const Main = () => {
         <Route path="/sign-in" element={<SignIn />} exact />
         <Route path="/sign-up" element={<SignUp />} exact />
         <Route path="/create-review" element={<CreateReviewForm />} exact />
-        <Route path="/my-reviews" element={<Reviews />} exact />
+        <Route
+          path="/my-reviews"
+          element={<Reviews showActions={true} />}
+          exact
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </View>

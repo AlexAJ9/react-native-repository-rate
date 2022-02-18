@@ -4,10 +4,12 @@ import ItemSeparator from "../common/Separator";
 import useIsUserAuthenticated from "../../utils/hooks/useIsUserAuthenticated";
 import Review from "./SingleReview";
 
-const renderItem = ({ item }) => <Review review={item} />;
+const renderItem = ({ item, refetch, showActions }) => (
+  <Review review={item} refetch={refetch} showActions={showActions} />
+);
 
-const Reviews = () => {
-  const { data, fetchMore } = useIsUserAuthenticated({
+const Reviews = ({ showActions }) => {
+  const { data, refetch } = useIsUserAuthenticated({
     includeReviews: true,
   });
   const reviews = data
@@ -19,7 +21,9 @@ const Reviews = () => {
       <FlatList
         data={reviews}
         ItemSeparatorComponent={ItemSeparator}
-        renderItem={renderItem}
+        renderItem={(review) =>
+          renderItem({ item: review.item, refetch, showActions })
+        }
         keyExtractor={(item) => item.id}
       />
     </View>
